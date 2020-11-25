@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phive xmlns="https://phar.io/phive">
   <phar name="behat/behat" version="^3.8.1" installed="3.8.1" location="./tools/behat" copy="false"/>
+  <phar name="phpunit" version="^9.4.2" installed="9.4.3" location="./tools/phpunit" copy="false"/>
 </phive>
