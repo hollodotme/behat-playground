@@ -1,0 +1,24 @@
+default:
+  gherkin:
+    filters:
+      tags: ~@wip
+  suites:
+    features:
+      paths:
+        - "%paths.base%/features/core"
+      contexts:
+        - FeatureContext
+    website:
+      autoload:
+      paths:
+        - "%paths.base%/features/website"
+      contexts:
+        - WebsiteContext
+    loggedinuser:
+      autoload:
+      paths:
+        - "%paths.base%/features/loggedinuser"
+      contexts:
+        - LoggedInUserContext
+
+

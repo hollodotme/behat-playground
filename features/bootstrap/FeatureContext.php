@@ -1,9 +1,6 @@
 <?php
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
 
 /**
  * Defines application features from the specific context.
@@ -23,6 +20,10 @@ class FeatureContext implements Context
 	 */
 	public function __construct()
 	{
+		assert_options( ASSERT_ACTIVE, 1 );
+		assert_options( ASSERT_EXCEPTION, 1 );
+		assert_options( ASSERT_WARNING, 0 );
+
 		$this->shelf  = new Shelf();
 		$this->basket = new Basket( $this->shelf );
 	}
@@ -59,9 +60,6 @@ class FeatureContext implements Context
 	 */
 	public function theOverallBasketPriceShouldBePs( $totalPrice )
 	{
-		if ( (float)$totalPrice !== $this->basket->getTotalPrice() )
-		{
-			throw new RuntimeException( 'Nope' );
-		}
+		assert( (float)$totalPrice === $this->basket->getTotalPrice(), 'nope' );
 	}
 }
