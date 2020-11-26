@@ -1,11 +1,14 @@
 <?php
 
+require __DIR__ . '/../../tools/phpunit';
+
 use Behat\Behat\Context\Context;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Defines application features from the specific context.
  */
-class LoggedInUserContext implements Context
+class LoggedInUserContext extends TestCase implements Context
 {
 	private $fieldDefinitions;
 
@@ -29,6 +32,8 @@ class LoggedInUserContext implements Context
 	 */
 	public function __construct()
 	{
+		parent::__construct();
+
 		# TODO: Implement login for user
 		# TODO: Provide logged in user instance
 
@@ -77,7 +82,10 @@ class LoggedInUserContext implements Context
 	 */
 	public function theObjectHasTheColor( $objectName, $expectedColor )
 	{
-		assert( $this->objects->getObject( $objectName )['color'] === $expectedColor );
-	}
+		$mock = $this->getMockBuilder( Countable::class )->getMockForAbstractClass();
+		$mock->method( 'count' )->willReturn( 42 );
 
+		self::assertSame( $expectedColor, $this->objects->getObject( $objectName )['color'] );
+		self::assertCount( 42, $mock );
+	}
 }
