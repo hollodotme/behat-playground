@@ -19,6 +19,7 @@ default:
       paths:
         - "%paths.base%/features/loggedinuser"
       contexts:
-        - LoggedInUserContext
+        - LoggedInUserFieldDefinitionContext
+        - LoggedInUserTableContext
 
 
