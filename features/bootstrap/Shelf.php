@@ -1,16 +1,16 @@
-<?php
+<?php declare(strict_types=1);
 
 final class Shelf
 {
-	private $priceMap = array();
+	private array $priceMap = [];
 
-	public function setProductPrice($product, $price)
+	public function setProductPrice( string $product, float $price ) : void
 	{
-		$this->priceMap[$product] = $price;
+		$this->priceMap[ $product ] = $price;
 	}
 
-	public function getProductPrice($product)
+	public function getProductPrice( string $product ) : float
 	{
-		return $this->priceMap[$product];
+		return $this->priceMap[ $product ] ?? 0.0;
 	}
 }

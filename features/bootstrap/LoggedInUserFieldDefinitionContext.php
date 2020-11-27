@@ -7,11 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 final class LoggedInUserFieldDefinitionContext extends TestCase implements Context
 {
-	private $fieldDefinitions;
+	private FieldDefinitions $fieldDefinitions;
 
-	private $objects;
+	private Objects $objects;
 
-	private $users = [
+	private array $users = [
 		'import' => [
 			'ignoreLocks' => true,
 		],

@@ -1,53 +1,54 @@
-<?php
+<?php declare(strict_types=1);
 
 use Behat\Behat\Context\Context;
 
-/**
- * Defines application features from the specific context.
- */
-class FeatureContext implements Context
+final class FeatureContext implements Context
 {
-	private $shelf;
+	private Shelf $shelf;
 
-	private $basket;
+	private Basket $basket;
 
-	/**
-	 * Initializes context.
-	 *
-	 * Every scenario gets its own context instance.
-	 * You can also pass arbitrary arguments to the
-	 * context constructor through behat.yml.
-	 */
 	public function __construct()
 	{
-		assert_options( ASSERT_ACTIVE, 1 );
-		assert_options( ASSERT_EXCEPTION, 1 );
-		assert_options( ASSERT_WARNING, 0 );
-
 		$this->shelf  = new Shelf();
 		$this->basket = new Basket( $this->shelf );
 	}
 
+	/** @BeforeFeature */
+	public static function prepare() : void
+	{
+		assert_options( ASSERT_ACTIVE, 1 );
+		assert_options( ASSERT_EXCEPTION, 1 );
+		assert_options( ASSERT_WARNING, 0 );
+	}
+
 	/**
 	 * @Given there is a :arg1, which costs £:arg2
+	 *
+	 * @param string $product
+	 * @param string $price
 	 */
-	public function thereIsAWhichCostsPs( $product, $price )
+	public function thereIsAWhichCostsPs( string $product, string $price ) : void
 	{
-		$this->shelf->setProductPrice( $product, $price );
+		$this->shelf->setProductPrice( $product, (float)$price );
 	}
 
 	/**
 	 * @When I add the :product to the basket
+	 *
+	 * @param string $product
 	 */
-	public function iAddTheToTheBasket( $product )
+	public function iAddTheToTheBasket( string $product ) : void
 	{
 		$this->basket->addProduct( $product );
 	}
 
 	/**
 	 * @Then I should have :count product(s) in the basket
+	 *
+	 * @param string $count
 	 */
-	public function iShouldHaveProductInTheBasket( $count )
+	public function iShouldHaveProductInTheBasket( string $count ) : void
 	{
 		if ( (int)$count !== $this->basket->count() )
 		{
@@ -57,8 +58,10 @@ class FeatureContext implements Context
 
 	/**
 	 * @Then the overall basket price should be £:totalPrice
+	 *
+	 * @param string $totalPrice
 	 */
-	public function theOverallBasketPriceShouldBePs( $totalPrice )
+	public function theOverallBasketPriceShouldBePs( string $totalPrice ) : void
 	{
 		assert( (float)$totalPrice === $this->basket->getTotalPrice(), 'nope' );
 	}

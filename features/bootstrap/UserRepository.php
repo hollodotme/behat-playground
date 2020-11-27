@@ -2,7 +2,7 @@
 
 final class UserRepository
 {
-	private $users = [];
+	private array $users = [];
 
 	public function addUser( string $username, string $password ) : void
 	{

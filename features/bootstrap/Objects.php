@@ -2,13 +2,13 @@
 
 final class Objects
 {
-	private $fieldDefinitions;
+	private FieldDefinitions $fieldDefinitions;
 
-	private $objects;
+	private array $objects;
 
-	private $users;
+	private array $users;
 
-	public function __construct( FieldDefinitions $fieldDefinitions, $users )
+	public function __construct( FieldDefinitions $fieldDefinitions, array $users )
 	{
 		$this->fieldDefinitions = $fieldDefinitions;
 		$this->users            = $users;

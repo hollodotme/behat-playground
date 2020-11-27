@@ -2,7 +2,7 @@
 
 final class FieldDefinitions
 {
-	private $definitions = [
+	private array $definitions = [
 		'objectName'   => [
 			'fieldName' => 'objectName',
 			'locked'    => false,
